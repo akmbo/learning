@@ -1,0 +1,49 @@
+{% extends "layout.html" %} {% block content %}
+
+<form action="/contacts" method="get" class="search-form">
+  <label for="search">Search term</label>
+  <input
+    id="search"
+    type="search"
+    name="q"
+    value="{{ request.args.get('q') or '' }}"
+    placeholder="Search term"
+  />
+  <input type="submit" value="Search" />
+</form>
+
+<form action="/contacts/new">
+  <input type="submit" value="New" />
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contact in contacts %}
+    <tr>
+      <th>{{ contact.first or "None" }}</th>
+      <th>{{ contact.last or "None" }}</th>
+      <th>{{ contact.phone or "None" }}</th>
+      <th>{{ contact.email or "None" }}</th>
+      <th class="contact-options">
+        <form action="/contacts/{{ contact.id }}/edit">
+          <input type="submit" value="Edit" />
+        </form>
+        <form action="/contacts/{{ contact.id }}">
+          <input type="submit" value="View" />
+        </form>
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

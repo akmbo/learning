@@ -1,0 +1,56 @@
+{% extends "layout.html" %} {% block content %}
+
+<div style="width: 100%">
+  <form action="/contacts">
+    <input type="submit" value="Back" />
+  </form>
+</div>
+
+<form action="/contacts/new" method="post" class="edit-contact">
+  <fieldset>
+    <legend>Contact Values</legend>
+    <p>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        value="{{ contact.email or '' }}"
+      />
+      <span>{{ contact.errors.get("email") or "" }}</span>
+    </p>
+    <p>
+      <label for="first_name">First Name</label>
+      <input
+        type="text"
+        name="first_name"
+        id="first_name"
+        value="{{ contact.first or '' }}"
+      />
+      <span>{{ contact.errors.get("first") or "" }}</span>
+    </p>
+    <p>
+      <label for="last_name">Last Name</label>
+      <input
+        type="text"
+        name="last_name"
+        id="last_name"
+        value="{{ contact.last or '' }}"
+      />
+      <span>{{ contact.errors.get("last") or "" }}</span>
+    </p>
+    <p>
+      <label for="phone">Phone</label>
+      <input
+        type="text"
+        name="phone"
+        id="phone"
+        value="{{ contact.phone or '' }}"
+      />
+    </p>
+    <input type="submit" value="Save" />
+    <span>{{ contact.errors.get("phone") or "" }}</span>
+  </fieldset>
+</form>
+
+{% endblock %}

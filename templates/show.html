@@ -1,0 +1,22 @@
+{% extends "index.html" %} {% block content %}
+
+<h1>{{ contact.first }} {{ contact.last }}</h1>
+
+<div>
+  <div>Phone: {{ contact.phone }}</div>
+  <div>Phone: {{ contact.email }}</div>
+</div>
+
+<div style="display: flex; gap: 0.5rem">
+  <form action="/contacts/{{ contact.id }}/edit">
+    <input type="submit" value="Edit" />
+  </form>
+  <form action="/contacts/{{ contact.id }}/delete" method="post">
+    <input type="submit" value="Delete" />
+  </form>
+  <form action="/contacts">
+    <input type="submit" value="Back" />
+  </form>
+</div>
+
+{% endblock %}
