@@ -5,18 +5,19 @@ import (
 )
 
 func Racer(a, b string) (winner string) {
-	result := make(chan string)
+	select {
+	case <-ping(a):
+		return a
+	case <-ping(b):
+		return b
+	}
+}
 
+func ping(url string) chan struct{} {
+	ch := make(chan struct{})
 	go func() {
-		http.Get(a)
-		result <- a
+		http.Get(url)
+		close(ch)
 	}()
-	go func() {
-		http.Get(b)
-		result <- b
-	}()
-
-	winner = <-result
-
-	return
+	return ch
 }
